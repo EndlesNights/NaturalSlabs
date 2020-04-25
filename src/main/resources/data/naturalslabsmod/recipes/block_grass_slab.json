@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:grass_block"
+    }
+  },
+  "result": {
+    "item": "naturalslabsmod:block_grass_slab",
+    "count": 4
+  }
+}

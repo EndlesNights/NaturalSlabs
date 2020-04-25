@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "naturalslabsmod:block/carrots_stage0_slab" },
+        "age=1": { "model": "naturalslabsmod:block/carrots_stage0_slab" },
+        "age=2": { "model": "naturalslabsmod:block/carrots_stage1_slab" },
+        "age=3": { "model": "naturalslabsmod:block/carrots_stage1_slab" },
+        "age=4": { "model": "naturalslabsmod:block/carrots_stage2_slab" },
+        "age=5": { "model": "naturalslabsmod:block/carrots_stage2_slab" },
+        "age=6": { "model": "naturalslabsmod:block/carrots_stage2_slab" },
+        "age=7": { "model": "naturalslabsmod:block/carrots_stage3_slab" }
+    }
+}

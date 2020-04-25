@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    
+    "naturalslabsmod:grass_slab",
+	"naturalslabsmod:fern_slab",
+	
+    "naturalslabsmod:tall_grass_slab",
+	"naturalslabsmod:large_fern_slab",
+	
+	"naturalslabsmod:dandelion_slab",
+	"naturalslabsmod:poppy_slab",
+	"naturalslabsmod:blue_orchid_slab",
+	"naturalslabsmod:allium_slab",
+	"naturalslabsmod:azure_bluet_slab",
+	"naturalslabsmod:red_tulip_slab",
+	"naturalslabsmod:orange_tulip_slab",
+	"naturalslabsmod:white_tulip_slab",
+	"naturalslabsmod:pink_tulip_slab",
+	"naturalslabsmod:oxeye_daisy_slab",
+	"naturalslabsmod:cornflower_slab",
+	"naturalslabsmod:lily_of_the_valley_slab"
+  ]
+}

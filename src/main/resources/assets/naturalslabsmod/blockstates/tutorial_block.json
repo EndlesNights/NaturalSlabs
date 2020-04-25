@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "": [
+            { "model": "naturalslabsmod:block/tutorial_block" }
+        ]
+    }
+}

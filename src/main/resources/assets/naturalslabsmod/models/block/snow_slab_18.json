@@ -1,0 +1,42 @@
+{   "parent": "block/thin_block",
+    "textures": {
+		"1": "naturalslabsmod:block/snow_side",
+        "particle": "block/snow",
+        "texture": "block/snow"
+    },
+    "elements": [
+        {   "from": [-0.01, -8, -0.01],
+			"to": [16.01, 0, 16.01],
+            "faces": {
+                "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#texture", "cullface": "down" },
+                "up":    { "uv": [ 0, 0, 0, 0 ], "texture": "#texture" },
+                "north": { "uv": [ 0, 0, 16, 8 ], "texture": "#texture" },
+                "south": { "uv": [ 0, 0, 16, 8 ], "texture": "#texture" },
+                "west":  { "uv": [ 0, 0, 16, 8 ], "texture": "#texture" },
+                "east":  { "uv": [ 0, 0, 16, 8 ], "texture": "#texture" }
+            }
+        },
+        {   "from": [ -0.01, 0, -0.01 ],
+			"to": [16.01, 10, 16.01],
+            "faces": {
+                "down":  { "uv": [ 0, 0, 0, 0 ], "texture": "#texture", "cullface": "down" },
+                "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+                "north": { "uv": [ 0, 6, 16, 16 ], "texture": "#texture" },
+                "south": { "uv": [ 0, 6, 16, 16 ], "texture": "#texture" },
+                "west":  { "uv": [ 0, 6, 16, 16 ], "texture": "#texture" },
+                "east":  { "uv": [ 0, 6, 16, 16 ], "texture": "#texture" }
+            }
+        },
+		{
+			"from": [-0.01, -16, -0.01],
+			"to": [16.01, -8, 16.01],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 8], "texture": "#1", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 8], "texture": "#1", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 8], "texture": "#1", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 8], "texture": "#1", "cullface": "west"}
+			}
+		}		
+    ]
+}

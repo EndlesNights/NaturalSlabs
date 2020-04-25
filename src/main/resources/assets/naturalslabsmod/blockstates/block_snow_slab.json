@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "snowlayers=1":  { "model": "naturalslabsmod:block/snow_slab_2" },
+        "snowlayers=2":  { "model": "naturalslabsmod:block/snow_slab_4" },
+        "snowlayers=3":  { "model": "naturalslabsmod:block/snow_slab_6" },
+        "snowlayers=4":  { "model": "naturalslabsmod:block/snow_slab_8" },
+        "snowlayers=5":  { "model": "naturalslabsmod:block/snow_slab_10" },
+        "snowlayers=6":  { "model": "naturalslabsmod:block/snow_slab_12" },
+        "snowlayers=7":  { "model": "naturalslabsmod:block/snow_slab_14" },
+        "snowlayers=8":  { "model": "naturalslabsmod:block/snow_slab_16" },
+		"snowlayers=9":  { "model": "naturalslabsmod:block/snow_slab_18" },
+		"snowlayers=10":  { "model": "naturalslabsmod:block/snow_slab_20" },
+		"snowlayers=11":  { "model": "naturalslabsmod:block/snow_slab_22" },
+		"snowlayers=12":  { "model": "naturalslabsmod:block/snow_slab_24" }
+    }
+}

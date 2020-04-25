@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=lower": { "model": "naturalslabsmod:block/lilac_bottom_slab" },
+        "half=upper": { "model": "naturalslabsmod:block/lilac_top_slab" }
+    }
+}

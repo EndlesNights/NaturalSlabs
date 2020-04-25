@@ -1,0 +1,7 @@
+{
+    "parent": "naturalslabsmod:block/cross",
+    "textures": {
+        "particle": "block/allium",
+        "cross": "block/allium"
+    }
+}

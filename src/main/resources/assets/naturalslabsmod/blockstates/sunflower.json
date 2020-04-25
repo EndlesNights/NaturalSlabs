@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "facing=east,half=lower":  { "model": "block/sunflower_bottom" },
+        "facing=west,half=lower":  { "model": "block/sunflower_bottom", "y": 180, "uvlock": true },
+        "facing=south,half=lower": { "model": "block/sunflower_bottom", "y": 90, "uvlock": true },
+        "facing=north,half=lower": { "model": "block/sunflower_bottom", "y": 270, "uvlock": true },
+        "facing=east,half=upper":  { "model": "block/sunflower_top" },
+        "facing=west,half=upper":  { "model": "block/sunflower_top", "y": 180, "uvlock": true },
+        "facing=south,half=upper": { "model": "block/sunflower_top", "y": 90, "uvlock": true },
+        "facing=north,half=upper": { "model": "block/sunflower_top", "y": 270, "uvlock": true }
+    }
+}

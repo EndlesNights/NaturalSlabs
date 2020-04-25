@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "naturalslabsmod:block/block_path_slab" },
+    "type=top": { "model": "naturalslabsmod:block/block_path_slab_upper" },
+    "type=double": { "model": "minecraft:block/grass_path" }
+  }
+}

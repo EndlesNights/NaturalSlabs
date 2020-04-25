@@ -1,0 +1,38 @@
+{
+	"itemGroup.naturalslabsmod": "Natural Slabs",
+
+	"biome.naturalslabsmod.plains_slab": "Plains Slab",
+	
+	"block.naturalslabsmod.tutorial_block": "Test Block",
+	"block.naturalslabsmod.block_grass_slab": "Grass Slab",
+	"block.naturalslabsmod.block_dirt_slab": "Dirt Slab",
+	"block.naturalslabsmod.block_path_slab": "Path Slab",
+	"block.naturalslabsmod.block_farmland_slab": "Farmland Slab",
+	"block.naturalslabsmod.block_coarse_dirt_slab": "Coarse Dirt Slab",
+	"block.naturalslabsmod.block_gravel_slab": "Gravel Slab",
+	"block.naturalslabsmod.block_sand_slab": "Sand Slab",
+	"block.naturalslabsmod.block_red_sand_slab": "Red Sand Slab",
+	
+	"block.naturalslabsmod.grass_slab": "Grass",
+	"block.naturalslabsmod.fern_slab": "Fern",
+	
+	"block.naturalslabsmod.tall_grass_slab": "Tall Grass",
+	"block.naturalslabsmod.large_fern_slab": "Large Fern",
+	
+	"block.naturalslabsmod.dandelion_slab": "Dandelion",
+	"block.naturalslabsmod.poppy_slab": "Poppy",
+	"block.naturalslabsmod.blue_orchid_slab": "Blue Orchid",
+	"block.naturalslabsmod.allium_slab": "Allium",
+	"block.naturalslabsmod.azure_bluet_slab": "Azure Bluet",
+	"block.naturalslabsmod.red_tulip_slab": "Red Tulip",
+	"block.naturalslabsmod.orange_tulip_slab": "Orange Tulip",
+	"block.naturalslabsmod.white_tulip_slab": "White Tulip",
+	"block.naturalslabsmod.pink_tulip_slab": "Pink Tulip",
+	"block.naturalslabsmod.oxeye_daisy_slab": "Oxeye Daisy",
+	"block.naturalslabsmod.cornflower_slab": "Cornflower",
+	"block.naturalslabsmod.lily_of_the_valley_slab": "Lily of the Valley",
+
+	"block.naturalslabsmod.wither_rose_slab": "Wither Rose",
+	
+	"block.naturalslabsmod.sunflower_slab": "Sunflower"
+}

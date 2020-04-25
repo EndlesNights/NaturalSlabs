@@ -1,0 +1,6 @@
+{
+    "parent": "naturalslabsmod:block/crop",
+    "textures": {
+        "crop": "block/carrots_stage3"
+    }
+}

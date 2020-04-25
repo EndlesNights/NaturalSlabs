@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:small_flowers",
+    
+    "minecraft:sunflower",
+    "minecraft:lilac",
+    "minecraft:peony",
+    "minecraft:rose_bush",
+
+    "minecraft:wheat",
+    "minecraft:beetroots",
+    "minecraft:carrots",
+    "minecraft:potatoes",        
+    "minecraft:melon_stem",
+    "minecraft:attached_melon_stem",    
+    "minecraft:pumpkin_stem",
+    "minecraft:attached_pumpkin_stem",    
+    
+    "#minecraft:saplings",
+    
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    
+    "minecraft:sweet_berry_bush",
+    "minecraft:grass",
+    "minecraft:tall_grass",
+    "minecraft:fern"
+  ]
+}

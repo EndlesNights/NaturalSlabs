@@ -1,0 +1,6 @@
+{
+    "parent": "naturalslabsmod:block/crop",
+    "textures": {
+        "crop": "block/beetroots_stage0"
+    }
+}

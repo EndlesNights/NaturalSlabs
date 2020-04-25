@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "age=0": { "model": "naturalslabsmod:block/beetroots_stage0_slab" },
+        "age=1": { "model": "naturalslabsmod:block/beetroots_stage1_slab" },
+        "age=2": { "model": "naturalslabsmod:block/beetroots_stage2_slab" },
+        "age=3": { "model": "naturalslabsmod:block/beetroots_stage3_slab" }
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:grass_path"
+    }
+  },
+  "result": {
+    "item": "naturalslabsmod:block_path_slab",
+    "count": 4
+  }
+}

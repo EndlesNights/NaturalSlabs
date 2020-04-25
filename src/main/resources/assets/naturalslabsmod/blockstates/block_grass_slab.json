@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "type=bottom":[
+		{ "model": "naturalslabsmod:block/block_grass_slab" },
+		{ "model": "naturalslabsmod:block/block_grass_slab", "y": 90 },
+		{ "model": "naturalslabsmod:block/block_grass_slab", "y": 180 },
+		{ "model": "naturalslabsmod:block/block_grass_slab", "y": 270 }
+	],
+        "type=top":[
+		{ "model": "naturalslabsmod:block/block_grass_slab_upper" },
+		{ "model": "naturalslabsmod:block/block_grass_slab_upper", "y": 90 },
+		{ "model": "naturalslabsmod:block/block_grass_slab_upper", "y": 180 },
+		{ "model": "naturalslabsmod:block/block_grass_slab_upper", "y": 270 }
+	],
+    "type=double": { "model": "minecraft:block/grass_block" }
+  }
+}

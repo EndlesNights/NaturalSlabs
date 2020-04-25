@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=lower": { "model": "naturalslabsmod:block/tall_grass_bottom_slab" },
+        "half=upper":    { "model": "naturalslabsmod:block/tall_grass_top_slab" }
+    }
+}

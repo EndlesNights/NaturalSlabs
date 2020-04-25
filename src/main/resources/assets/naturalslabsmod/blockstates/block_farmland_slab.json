@@ -1,0 +1,28 @@
+{
+	"variants": {
+		"type=bottom,moisture=0": { "model": "naturalslabsmod:block/block_farmland_slab" },
+		"type=bottom,moisture=1": { "model": "naturalslabsmod:block/block_farmland_slab" },
+		"type=bottom,moisture=2": { "model": "naturalslabsmod:block/block_farmland_slab" },
+		"type=bottom,moisture=3": { "model": "naturalslabsmod:block/block_farmland_slab" },
+		"type=bottom,moisture=4": { "model": "naturalslabsmod:block/block_farmland_slab" },
+		"type=bottom,moisture=5": { "model": "naturalslabsmod:block/block_farmland_slab" },
+		"type=bottom,moisture=6": { "model": "naturalslabsmod:block/block_farmland_slab" },
+		"type=bottom,moisture=7": { "model": "naturalslabsmod:block/block_farmland_moist_slab" },
+		"type=top,moisture=0": { "model": "naturalslabsmod:block/block_farmland_slab_upper" },
+		"type=top,moisture=1": { "model": "naturalslabsmod:block/block_farmland_slab_upper" },
+		"type=top,moisture=2": { "model": "naturalslabsmod:block/block_farmland_slab_upper" },
+		"type=top,moisture=3": { "model": "naturalslabsmod:block/block_farmland_slab_upper" },
+		"type=top,moisture=4": { "model": "naturalslabsmod:block/block_farmland_slab_upper" },
+		"type=top,moisture=5": { "model": "naturalslabsmod:block/block_farmland_slab_upper" },
+		"type=top,moisture=6": { "model": "naturalslabsmod:block/block_farmland_slab_upper" },
+		"type=top,moisture=7": { "model": "naturalslabsmod:block/block_farmland_moist_slab_upper" },
+		"type=double,moisture=0": { "model": "minecraft:block/farmland" },
+		"type=double,moisture=1": { "model": "minecraft:block/farmland" },
+		"type=double,moisture=2": { "model": "minecraft:block/farmland" },
+		"type=double,moisture=3": { "model": "minecraft:block/farmland" },
+		"type=double,moisture=4": { "model": "minecraft:block/farmland" },
+		"type=double,moisture=5": { "model": "minecraft:block/farmland" },
+		"type=double,moisture=6": { "model": "minecraft:block/farmland" },
+		"type=double,moisture=7": { "model": "minecraft:block/farmland" }
+	}
+}
