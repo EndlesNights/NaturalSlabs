@@ -51,8 +51,8 @@ public class WorldTickHandler
 	    			@SuppressWarnings("unchecked")
 	    			Iterable<ChunkHolder> chunkContainer = (Iterable<ChunkHolder>) getChunkHolderIterator.invoke(world.getChunkProvider().chunkManager);
 	    			
-//	    			if(world.rand.nextInt(16) > 0)
-//	    				return;
+	    			if(world.rand.nextInt(16) > 0)
+	    				return;
 	    			
 	    			for (ChunkHolder chunkHolder : chunkContainer)
 		    		{

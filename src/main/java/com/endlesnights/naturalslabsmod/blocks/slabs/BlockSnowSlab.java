@@ -78,7 +78,6 @@ public class BlockSnowSlab extends Block
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
-		System.out.println(state.get(LAYERS));
 			return SHAPES[state.get(LAYERS)];
 	}
 	@Override

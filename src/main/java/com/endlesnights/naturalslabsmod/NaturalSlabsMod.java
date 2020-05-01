@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import com.endlesnights.naturalslabsmod.config.Config;
 import com.endlesnights.naturalslabsmod.events.FallEvent;
 import com.endlesnights.naturalslabsmod.init.ModBiomes;
 import com.endlesnights.naturalslabsmod.init.ModBlocks;
@@ -20,10 +21,13 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -47,6 +51,10 @@ public class NaturalSlabsMod
 	public NaturalSlabsMod()
 	{
 		instance = this;		
+		
+		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER, "naturalslabsmod-server.toml");
+		Config.loadConfig(Config.SERVER, FMLPaths.CONFIGDIR.get().resolve("naturalslabsmod-server.toml").toString());
+		
 		creativeTab = new CreativeTab();
 		compatList.add(ModBlocks::new);
 		//compatList.add(ModBlocksCompat::new);
