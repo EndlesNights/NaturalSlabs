@@ -1,0 +1,6 @@
+{
+    "parent": "naturalslabsmod:block/fence_slab_side_down",
+    "textures": {
+        "texture": "block/oak_planks"
+    }
+}

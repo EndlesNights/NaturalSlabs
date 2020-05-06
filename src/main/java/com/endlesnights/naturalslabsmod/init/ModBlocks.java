@@ -3,7 +3,7 @@ package com.endlesnights.naturalslabsmod.init;
 import com.endlesnights.naturalslabsmod.INaturalSlabsCompat;
 import com.endlesnights.naturalslabsmod.NaturalSlabsMod;
 import com.endlesnights.naturalslabsmod.blocks.BlockSunFlower;
-import com.endlesnights.naturalslabsmod.blocks.TutorialBlock;
+import com.endlesnights.naturalslabsmod.blocks.FenceSlabBlock;
 import com.endlesnights.naturalslabsmod.blocks.foliage.BeetrootSlab;
 import com.endlesnights.naturalslabsmod.blocks.foliage.CarrotSlab;
 import com.endlesnights.naturalslabsmod.blocks.foliage.CropsSlab;
@@ -24,6 +24,7 @@ import com.endlesnights.naturalslabsmod.blocks.slabs.BlockSnowSlab;
 import com.endlesnights.naturalslabsmod.blocks.slabs.BlockSnowStairs;
 import com.endlesnights.naturalslabsmod.blocks.slabs.FallinglSlab;
 import com.endlesnights.naturalslabsmod.placehandler.BonemealPlaceHandler;
+import com.endlesnights.naturalslabsmod.placehandler.FenceSlabPlaceHandler;
 import com.endlesnights.naturalslabsmod.placehandler.SnowSlabPlaceHandler;
 import com.endlesnights.naturalslabsmod.placehandler.SnowStairsPlaceHandler;
 import com.endlesnights.naturalslabsmod.placehandler.SugarCaneSlabPlaceHandler;
@@ -111,11 +112,15 @@ public class ModBlocks implements INaturalSlabsCompat
 	public static Block block_snow_slab = null;
 	public static Block block_snow_stair = null;
 	
+	
+	public static Block oak_fence_slab = null;
 	public static Block SUNFLOWER = null;
 	
 	@SubscribeEvent
 	public void registerBlocks(RegistryEvent.Register<Block> event)
-	{		
+	{	
+		oak_fence_slab = registerBlock(new FenceSlabBlock(Blocks.OAK_FENCE, Block.Properties.from(Blocks.OAK_FENCE)), "oak_fence_slab");
+		
 		block_grass_slab = registerBlock(new BlockGrassSlab(), "block_grass_slab");
 		block_dirt_slab = registerBlock(new BlockDirtSlab(), "block_dirt_slab");
 		block_path_slab = registerBlock(new BlockPathSlab(), "block_path_slab");
@@ -243,6 +248,8 @@ public class ModBlocks implements INaturalSlabsCompat
 		
 		SnowStairsPlaceHandler.registerPlaceEntry(Items.SNOW.getRegistryName(), block_snow_stair);
 		SnowStairsPlaceHandler.registerPlaceEntry(Items.SNOW_BLOCK.getRegistryName(), block_snow_stair);
+		
+		FenceSlabPlaceHandler.registerPlaceEntry(Items.OAK_FENCE.getRegistryName(), oak_fence_slab);
 	}
 	
     public static Block registerBlock(Block block, String name)
