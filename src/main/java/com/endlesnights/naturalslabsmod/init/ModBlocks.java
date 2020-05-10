@@ -112,14 +112,24 @@ public class ModBlocks implements INaturalSlabsCompat
 	public static Block block_snow_slab = null;
 	public static Block block_snow_stair = null;
 	
-	
+	public static Block acacia_fence_slab = null;
+	public static Block birch_fence_slab = null;
+	public static Block spruce_fence_slab = null;
+	public static Block jungle_fence_slab = null;
 	public static Block oak_fence_slab = null;
+	public static Block dark_oak_fence_slab = null;
+	
 	public static Block SUNFLOWER = null;
 	
 	@SubscribeEvent
 	public void registerBlocks(RegistryEvent.Register<Block> event)
 	{	
+		acacia_fence_slab = registerBlock(new FenceSlabBlock(Blocks.ACACIA_FENCE, Block.Properties.from(Blocks.ACACIA_FENCE)), "acacia_fence_slab");
+		birch_fence_slab = registerBlock(new FenceSlabBlock(Blocks.BIRCH_FENCE, Block.Properties.from(Blocks.BIRCH_FENCE)), "birch_fence_slab");
+		spruce_fence_slab = registerBlock(new FenceSlabBlock(Blocks.SPRUCE_FENCE, Block.Properties.from(Blocks.SPRUCE_FENCE)), "spruce_fence_slab");
+		jungle_fence_slab = registerBlock(new FenceSlabBlock(Blocks.JUNGLE_FENCE, Block.Properties.from(Blocks.JUNGLE_FENCE)), "jungle_fence_slab");
 		oak_fence_slab = registerBlock(new FenceSlabBlock(Blocks.OAK_FENCE, Block.Properties.from(Blocks.OAK_FENCE)), "oak_fence_slab");
+		dark_oak_fence_slab = registerBlock(new FenceSlabBlock(Blocks.DARK_OAK_FENCE, Block.Properties.from(Blocks.DARK_OAK_FENCE)), "dark_oak_fence_slab");
 		
 		block_grass_slab = registerBlock(new BlockGrassSlab(), "block_grass_slab");
 		block_dirt_slab = registerBlock(new BlockDirtSlab(), "block_dirt_slab");
@@ -249,7 +259,12 @@ public class ModBlocks implements INaturalSlabsCompat
 		SnowStairsPlaceHandler.registerPlaceEntry(Items.SNOW.getRegistryName(), block_snow_stair);
 		SnowStairsPlaceHandler.registerPlaceEntry(Items.SNOW_BLOCK.getRegistryName(), block_snow_stair);
 		
+		FenceSlabPlaceHandler.registerPlaceEntry(Items.ACACIA_FENCE.getRegistryName(), acacia_fence_slab);
+		FenceSlabPlaceHandler.registerPlaceEntry(Items.BIRCH_FENCE.getRegistryName(), birch_fence_slab);
+		FenceSlabPlaceHandler.registerPlaceEntry(Items.SPRUCE_FENCE.getRegistryName(), spruce_fence_slab);
+		FenceSlabPlaceHandler.registerPlaceEntry(Items.JUNGLE_FENCE.getRegistryName(), jungle_fence_slab);
 		FenceSlabPlaceHandler.registerPlaceEntry(Items.OAK_FENCE.getRegistryName(), oak_fence_slab);
+		FenceSlabPlaceHandler.registerPlaceEntry(Items.DARK_OAK_FENCE.getRegistryName(), dark_oak_fence_slab);
 	}
 	
     public static Block registerBlock(Block block, String name)

@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0.3'
+version = '1.0.4'
 group = 'com.endlesnights.naturalslabsmod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'naturalslabsmod'
 
@@ -76,7 +76,7 @@ jar {
         attributes([
             "Specification-Title": "NaturalSlabsMod",
             "Specification-Vendor": "EndlesNights",
-            "Specification-Version": "1.0.3", // We are version 1 of ourselves
+            "Specification-Version": "1.0.4", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"EndlesNights",

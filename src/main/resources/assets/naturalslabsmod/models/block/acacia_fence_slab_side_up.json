@@ -1,0 +1,7 @@
+{
+    "parent": "naturalslabsmod:block/fence_slab_side_up",
+    "textures": {
+        "texture": "block/acacia_planks"
+    }
+}
+

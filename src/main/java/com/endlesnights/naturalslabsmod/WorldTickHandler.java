@@ -6,6 +6,8 @@ import org.apache.logging.log4j.LogManager;
 
 import com.endlesnights.naturalslabsmod.blocks.slabs.BlockSnowSlab;
 import com.endlesnights.naturalslabsmod.blocks.slabs.BlockSnowStairs;
+import com.endlesnights.naturalslabsmod.config.Config;
+import com.endlesnights.naturalslabsmod.config.NaturalSlabsConfig;
 import com.endlesnights.naturalslabsmod.init.ModBlocks;
 
 import java.lang.reflect.Method;
@@ -27,6 +29,7 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 public class WorldTickHandler 
 {
@@ -39,13 +42,13 @@ public class WorldTickHandler
 	
 	@SubscribeEvent
 	public void worldTickEvent(WorldEvent event){
-	    if(event.getWorld() instanceof ServerWorld)
-	    {
-	    	ServerWorld world = (ServerWorld) event.getWorld();
-	    	if(world.isRaining())
-	    	{	
-	    		try
-	    		{
+		if(event.getWorld() instanceof ServerWorld)
+		{
+			ServerWorld world = (ServerWorld) event.getWorld();
+			if(world.isRaining())
+			{	
+				try
+				{
 	    			Method getChunkHolderIterator = ObfuscationReflectionHelper.findMethod(ChunkManager.class, "func_223491_f");
 	    			getChunkHolderIterator.setAccessible(true);
 	    			@SuppressWarnings("unchecked")
@@ -53,6 +56,9 @@ public class WorldTickHandler
 	    			
 	    			if(world.rand.nextInt(16) > 0)
 	    				return;
+	    			
+	    			Config.loadConfig(Config.SERVER, FMLPaths.CONFIGDIR.get().resolve("naturalslabsmod-server.toml").toString());
+	    			stackingSnow = NaturalSlabsConfig.snowAccumilation.get();
 	    			
 	    			for (ChunkHolder chunkHolder : chunkContainer)
 		    		{
@@ -69,7 +75,7 @@ public class WorldTickHandler
 		    				randLCG = randLCG * 3 + 1013904223;
 		    				int j2 = randLCG >> 2;
 		    				//Get rain height at random position in chunk, splits the random val j2 to use for both parts of position
-		    				BlockPos pos = world.getHeight(Heightmap.Type.MOTION_BLOCKING, new BlockPos(chunk_min_x + (j2 & 15), 0, chunk_min_y + (j2 >> 8 & 15))).down();
+		    				BlockPos pos = world.getHeight(Heightmap.Type.MOTION_BLOCKING, new BlockPos(chunk_min_x + (j2 & 15), 0, chunk_min_y + (j2 >> 8 & 15)));
 		    				BlockState state = world.getBlockState(pos);
 		    				
 		    				
@@ -77,11 +83,13 @@ public class WorldTickHandler
 		    				if(pos.getY() >= 0 && pos.getY() < 256 && world.getLightFor(LightType.BLOCK, pos ) < 10 &&world.getBiome(pos).getTemperature(pos) < 0.15F) 
 		    			    {
 		    					//Check if block at positioin is a snow layer block
-		    			    	if(stackingSnow && state.getBlock() instanceof SnowBlock)
-		    			    	{
+		    					if(stackingSnow && state.getBlock() instanceof SnowBlock)
+		    					{
 		    			    		//Calculate mean surrounding block height
 		    			    		int height = state.get(SnowBlock.LAYERS);
-		    			    		if(height == 8) return;
+		    			    		if(height == 8 || height >= NaturalSlabsConfig.snowMaxHeightBlock.get())
+		    			    			return;
+		    			    		
 		    			    		BlockState north = world.getBlockState(pos.north());
 		    			    		BlockState south = world.getBlockState(pos.south());
 		    			    		BlockState east = world.getBlockState(pos.east());
@@ -126,42 +134,48 @@ public class WorldTickHandler
 		    		    					world.setBlockState(pos, Blocks.SNOW.getDefaultState().with(SnowBlock.LAYERS, height + 1));
 		    		    				}
 		    		    			}	
+		    		    			
+		    		    			return;
 		    		    		}
-		    					else if(world.getBlockState(pos).getBlock() instanceof SlabBlock
-	    							&& world.getBlockState(pos).get(SlabBlock.TYPE) == SlabType.BOTTOM)
-        	                    {
-		    						if(stackingSnow && world.getBlockState(pos.up()).getBlock() instanceof BlockSnowSlab)
-		    						{
-		    							world.setBlockState(pos.up(), ModBlocks.block_snow_slab.getDefaultState()
-		    									.with(BlockSnowSlab.LAYERS, world.getBlockState(pos.up()).get(BlockSnowSlab.LAYERS) +1));
-		    						}
-		    						else
-		    						{
-		    							world.setBlockState(pos.up(), ModBlocks.block_snow_slab.getDefaultState());
-		    						}
-        	                    }
-		    					else if(world.getBlockState(pos).getBlock() instanceof StairsBlock 
-        	                    	&& world.getBlockState(pos).get(StairsBlock.HALF) == Half.BOTTOM)
-        	                    {
-		    						
-		    						if(stackingSnow && world.getBlockState(pos.up()).getBlock() instanceof BlockSnowStairs)
-		    						{
-	        	                    	world.setBlockState(pos.up(), ModBlocks.block_snow_stair.getDefaultState()  
-	        	        						.with(StairsBlock.FACING, world.getBlockState(pos).get(StairsBlock.FACING))
-	        	        						.with(StairsBlock.SHAPE, world.getBlockState(pos).get(StairsBlock.SHAPE))
-		    									.with(BlockSnowSlab.LAYERS, world.getBlockState(pos.up()).get(BlockSnowSlab.LAYERS) +1));
-		    						}
-		    						else
-		    						{
-	        	                    	world.setBlockState(pos.up(), ModBlocks.block_snow_stair.getDefaultState()  
-	        	        						.with(StairsBlock.FACING, world.getBlockState(pos).get(StairsBlock.FACING))
-	        	        						.with(StairsBlock.SHAPE, world.getBlockState(pos).get(StairsBlock.SHAPE)));
-		    						}
-        	                    }
-		   			    	}
-		    	
-		    				
-		   			    }
+		    			    	
+		    			    	if(NaturalSlabsConfig.snowSlabStair.get())
+		    			    	{
+			    					if(world.getBlockState(pos.down()).getBlock() instanceof SlabBlock
+			    							&& world.getBlockState(pos.down()).get(SlabBlock.TYPE) == SlabType.BOTTOM)
+			    					{
+				    					if(stackingSnow && world.getBlockState(pos).getBlock() instanceof BlockSnowSlab 
+				    							&& world.getBlockState(pos).get(BlockSnowSlab.LAYERS)<= NaturalSlabsConfig.snowMaxHeightSlab.get() )
+				    					{
+				    						world.setBlockState(pos, ModBlocks.block_snow_slab.getDefaultState()
+				    								.with(BlockSnowSlab.LAYERS, world.getBlockState(pos).get(BlockSnowSlab.LAYERS) +1));
+				    					}
+				    					else if(world.isAirBlock(pos))
+				    					{
+				    						world.setBlockState(pos, ModBlocks.block_snow_slab.getDefaultState());
+				    					}
+			    					}
+			    					else if(world.getBlockState(pos.down()).getBlock() instanceof StairsBlock 
+			    							&& world.getBlockState(pos.down()).get(StairsBlock.HALF) == Half.BOTTOM)
+			    					{
+				    						
+			    						if(stackingSnow && world.getBlockState(pos).getBlock() instanceof BlockSnowStairs
+				    						&& world.getBlockState(pos).get(BlockSnowSlab.LAYERS)<= NaturalSlabsConfig.snowMaxHeightSlab.get())
+			    						{
+			    							world.setBlockState(pos, ModBlocks.block_snow_stair.getDefaultState()  
+			    									.with(StairsBlock.FACING, world.getBlockState(pos.down()).get(StairsBlock.FACING))
+			    									.with(StairsBlock.SHAPE, world.getBlockState(pos.down()).get(StairsBlock.SHAPE))
+			    									.with(BlockSnowSlab.LAYERS, world.getBlockState(pos).get(BlockSnowSlab.LAYERS) +1));
+			    						}
+			    						else if(world.isAirBlock(pos))
+			    						{
+			    							world.setBlockState(pos, ModBlocks.block_snow_stair.getDefaultState()  
+			        	        						.with(StairsBlock.FACING, world.getBlockState(pos.down()).get(StairsBlock.FACING))
+			        	        						.with(StairsBlock.SHAPE, world.getBlockState(pos.down()).get(StairsBlock.SHAPE)));
+			    						}
+			    					}
+		    			    	}
+		    			    }
+		    			}
 		   			}
 	    		} catch (Exception ex) {
 	    			LogManager.getLogger().fatal("COULD NOT ACCESS LOADED CHUNKS!");

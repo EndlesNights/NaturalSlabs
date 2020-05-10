@@ -36,10 +36,16 @@ public class BlockSnowSlab extends Block
 	
 	protected static final VoxelShape[] SHAPES = new VoxelShape[]{VoxelShapes.empty(),
 
-			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 2.0D, 16.0D),
-			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 2.0D, 16.0D),
-			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 2.0D, 16.0D),
-			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 2.0D, 16.0D),
+//			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 2.0D, 16.0D),
+//			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 2.0D, 16.0D),
+//			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 2.0D, 16.0D),
+//			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 2.0D, 16.0D),
+			
+			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, -6.0D, 16.0D),
+			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, -4.0D, 16.0D),
+			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, -2.0D, 16.0D),
+			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 0.0D, 16.0D),
+			
 			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 2.0D, 16.0D),
 			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 4.0D, 16.0D),
 			Block.makeCuboidShape(0.0D, -8.0D, 0.0D, 16.0D, 6.0D, 16.0D),
@@ -61,7 +67,7 @@ public class BlockSnowSlab extends Block
 	{
 		builder.add(LAYERS);
 	}
-//
+
 	@Override
 	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		switch(type) {

@@ -1,0 +1,7 @@
+{
+    "parent": "naturalslabsmod:block/fence_slab_post",
+    "textures": {
+        "texture": "block/jungle_planks"
+    }
+}
+
