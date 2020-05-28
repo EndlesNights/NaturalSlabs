@@ -84,7 +84,10 @@ public class SlabHelper
 		if(state.getBlock() == Blocks.ACACIA_SAPLING)
 			return ModBlocks.acacia_sapling_slab.getDefaultState();	
 		if(state.getBlock() == Blocks.DARK_OAK_SAPLING)
-			return ModBlocks.dark_oak_sapling_slab.getDefaultState();	
+			return ModBlocks.dark_oak_sapling_slab.getDefaultState();
+		
+		if(state.getBlock() == Blocks.SWEET_BERRY_BUSH)
+			return ModBlocks.sweetBerrySlab.getDefaultState();
 		
 		return state;
 	}
@@ -95,8 +98,8 @@ public class SlabHelper
 		if(state.getBlock() == Blocks.LARGE_FERN)
 			return ModBlocks.large_fern_slab.getDefaultState();
 		
-		if(state.getBlock() == Blocks.SUNFLOWER)
-			return ModBlocks.sunflower_slab.getDefaultState();	
+//		if(state.getBlock() == Blocks.SUNFLOWER)
+//			return ModBlocks.sunflower_slab.getDefaultState();	
 		if(state.getBlock() == Blocks.LILAC)
 			return ModBlocks.lilac_slab.getDefaultState();	
 		if(state.getBlock() == Blocks.ROSE_BUSH)

@@ -4,7 +4,6 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.endlesnights.naturalslabsmod.NaturalSlabsMod;
 import com.endlesnights.naturalslabsmod.init.ModBlocks;
 import com.endlesnights.naturalslabsmod.placehandler.SlabHelper;
 

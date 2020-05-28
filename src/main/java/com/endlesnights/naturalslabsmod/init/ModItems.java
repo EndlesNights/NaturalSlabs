@@ -3,7 +3,7 @@ package com.endlesnights.naturalslabsmod.init;
 import com.endlesnights.naturalslabsmod.NaturalSlabsMod;
 
 import net.minecraft.block.Block;
-//import net.minecraft.block.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 //import net.minecraft.item.ItemGroup;
@@ -37,16 +37,18 @@ public class ModItems
             createItemBlockForBlock(ModBlocks.block_coarse_dirt_slab, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab)),
             createItemBlockForBlock(ModBlocks.block_gravel_slab, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab)),
             createItemBlockForBlock(ModBlocks.block_sand_slab, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab)),
-            createItemBlockForBlock(ModBlocks.block_red_sand_slab, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab))
+            createItemBlockForBlock(ModBlocks.block_red_sand_slab, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab)),
             
-//			createItemBlockForBlock(ModBlocks.SUNFLOWER, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab)),
-//			createItemBlockForBlock(Blocks.SUNFLOWER, new Item.Properties().group(null)),
-//			createItemBlockForBlock(ModBlocks.oak_fence_slab, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab))
+            createItemBlockForBlock(ModBlocks.block_coarse_dirt_stairs, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab)),
+            createItemBlockForBlock(ModBlocks.block_dirt_stairs, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab)),
+            createItemBlockForBlock(ModBlocks.block_path_stairs, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab)),
+            createItemBlockForBlock(ModBlocks.block_grass_stairs, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab)),
+            
+			createItemBlockForBlock(ModBlocks.sunfloweralt, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab)),
+			createItemBlockForBlock(Blocks.SUNFLOWER, new Item.Properties().group(null))
 
-			
-//
-//			createItemBlockForBlock(ModBlocks.block_snow_slab, new Item.Properties().group(NaturalSlabsMod.instance.creativeTab))
-        );
+        	);
+        
     }
     
     private static BlockItem createItemBlockForBlock (Block block, Item.Properties properties)

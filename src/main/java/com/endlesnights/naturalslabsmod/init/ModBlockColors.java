@@ -3,6 +3,7 @@ package com.endlesnights.naturalslabsmod.init;
 import com.endlesnights.naturalslabsmod.NaturalSlabsMod;
 import com.endlesnights.naturalslabsmod.blocks.foliage.TallGrassSlab;
 import com.endlesnights.naturalslabsmod.blocks.slabs.BlockGrassSlab;
+import com.endlesnights.naturalslabsmod.blocks.stair.BlockGrassStair;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.color.BlockColors;
@@ -24,13 +25,14 @@ public class ModBlockColors
 		final BlockColors blockColors = event.getBlockColors();
 		
 		blockColors.register(new BlockGrassSlab.ColorHandler(), ModBlocks.block_grass_slab);
+		blockColors.register(new BlockGrassStair.ColorHandler(), ModBlocks.block_grass_stairs);
 		
 		blockColors.register(new TallGrassSlab.ColorHandler(),  ModBlocks.grass_slab);
 		blockColors.register(new TallGrassSlab.ColorHandler(),  ModBlocks.fern_slab);
 		
 		blockColors.register(new TallGrassSlab.ColorHandler(),  ModBlocks.tall_grass_slab);
 		blockColors.register(new TallGrassSlab.ColorHandler(),  ModBlocks.large_fern_slab);
-		blockColors.register(new TallGrassSlab.ColorHandler(),  ModBlocks.sunflower_slab);
+		//blockColors.register(new TallGrassSlab.ColorHandler(),  ModBlocks.sunflower_slab);
 		
 		blockColors.register(new TallGrassSlab.ColorHandler(),  ModBlocks.sugar_cane_slab);
 
@@ -48,5 +50,6 @@ public class ModBlockColors
 		};
 		
 		itemColors.register(itemBlockColourHandler, ModBlocks.block_grass_slab);
+		itemColors.register(itemBlockColourHandler, ModBlocks.block_grass_stairs);
 	}
 }

@@ -50,9 +50,9 @@ public class TallFlowerSlab extends DoublePlantSlab implements IGrowable
 	
 	public void grow(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_, BlockState state)
 	{
-		if(state.getBlock() == ModBlocks.sunflower_slab)
-			spawnAsEntity(p_225535_1_, p_225535_3_, new ItemStack(Blocks.SUNFLOWER));
-		else if(state.getBlock() == ModBlocks.lilac_slab)
+//		if(state.getBlock() == ModBlocks.sunflower_slab)
+//			spawnAsEntity(p_225535_1_, p_225535_3_, new ItemStack(Blocks.SUNFLOWER));
+		if(state.getBlock() == ModBlocks.lilac_slab)
 			spawnAsEntity(p_225535_1_, p_225535_3_, new ItemStack(Blocks.LILAC));
 		else if(state.getBlock() == ModBlocks.rose_bush_slab)
 			spawnAsEntity(p_225535_1_, p_225535_3_, new ItemStack(Blocks.ROSE_BUSH));
@@ -63,9 +63,9 @@ public class TallFlowerSlab extends DoublePlantSlab implements IGrowable
 	@Override
 	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player)
 	{
-		if (this == ModBlocks.sunflower_slab)
-			return new ItemStack(Items.SUNFLOWER);
-		else if (this == ModBlocks.lilac_slab)
+//		if (this == ModBlocks.sunflower_slab)
+//			return new ItemStack(Items.SUNFLOWER);
+		if (this == ModBlocks.lilac_slab)
 			return new ItemStack(Items.LILAC);
 		else if (this == ModBlocks.rose_bush_slab)
 			return new ItemStack(Items.ROSE_BUSH);

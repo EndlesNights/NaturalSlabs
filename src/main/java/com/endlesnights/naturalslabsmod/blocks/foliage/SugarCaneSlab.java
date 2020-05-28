@@ -2,14 +2,21 @@ package com.endlesnights.naturalslabsmod.blocks.foliage;
 
 import java.util.Random;
 
+import com.endlesnights.naturalslabsmod.init.ModBlocks;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.state.properties.SlabType;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -58,17 +65,42 @@ public class SugarCaneSlab extends Block implements net.minecraftforge.common.IP
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
 	{
-		if(worldIn.getBlockState(pos.down()).canSustainPlant(worldIn, pos.down(), Direction.UP, this)
-				|| worldIn.getBlockState(pos.down()).getBlock() == this)
-			return true;
+		if ( worldIn.getBlockState(pos.down()).canSustainPlant(worldIn, pos.down(), Direction.UP, this))
+				return true;
+			
+		Block block = worldIn.getBlockState(pos.down()).getBlock();
+
+		if (block == this)
+	         return true;
+		
+		if ((block == ModBlocks.block_grass_slab|| block == ModBlocks.block_dirt_slab || block == ModBlocks.block_coarse_dirt_slab || block == ModBlocks.block_sand_slab || block == ModBlocks.block_red_sand_slab)
+				&& worldIn.getBlockState(pos.down()).get(SlabBlock.TYPE) == SlabType.BOTTOM)
+		{
+			BlockPos blockpos = pos.down();
+
+			for(Direction direction : Direction.Plane.HORIZONTAL)
+			{
+				BlockState blockstate = worldIn.getBlockState(blockpos.offset(direction));
+               IFluidState ifluidstate = worldIn.getFluidState(blockpos.offset(direction));
+               if (ifluidstate.isTagged(FluidTags.WATER) || blockstate.getBlock() == Blocks.FROSTED_ICE)
+               {
+            	  
+            	   return true;
+               }
+            }
+         }
 		
 		return false;
-	}
+   }
 	
-	
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (!stateIn.isValidPosition(worldIn, currentPos)) {
+	@Override
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
+	{
+		worldIn.getPendingBlockTicks().scheduleTick(currentPos, this, 1);
+		if (!stateIn.isValidPosition(worldIn, currentPos))
+		{
 			worldIn.getPendingBlockTicks().scheduleTick(currentPos, this, 1);
+			return Blocks.AIR.getDefaultState();
 		}
 
 		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);

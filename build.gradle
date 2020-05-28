@@ -12,14 +12,14 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0.4'
+version = '1.0.5'
 group = 'com.endlesnights.naturalslabsmod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'naturalslabsmod'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200225-1.15.1'
+    mappings channel: 'snapshot', version: '20200514-1.15.1'
 
     runs {
         client {
@@ -76,7 +76,7 @@ jar {
         attributes([
             "Specification-Title": "NaturalSlabsMod",
             "Specification-Vendor": "EndlesNights",
-            "Specification-Version": "1.0.4", // We are version 1 of ourselves
+            "Specification-Version": "1.0.5", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"EndlesNights",

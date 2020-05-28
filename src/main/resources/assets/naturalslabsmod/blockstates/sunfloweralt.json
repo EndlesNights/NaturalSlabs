@@ -1,0 +1,21 @@
+{
+    "variants": {
+        "facing=east,half=lower,slabhalf=false":  { "model": "block/sunflower_bottom" },
+        "facing=west,half=lower,slabhalf=false":  { "model": "block/sunflower_bottom", "y": 180, "uvlock": true },
+        "facing=south,half=lower,slabhalf=false": { "model": "block/sunflower_bottom", "y": 90, "uvlock": true },
+        "facing=north,half=lower,slabhalf=false": { "model": "block/sunflower_bottom", "y": 270, "uvlock": true },
+        "facing=east,half=upper,slabhalf=false":  { "model": "block/sunflower_top" },
+        "facing=west,half=upper,slabhalf=false":  { "model": "block/sunflower_top", "y": 180, "uvlock": true },
+        "facing=south,half=upper,slabhalf=false": { "model": "block/sunflower_top", "y": 90, "uvlock": true },
+        "facing=north,half=upper,slabhalf=false": { "model": "block/sunflower_top", "y": 270, "uvlock": true },
+		
+		"facing=east,half=lower,slabhalf=true":  { "model": "naturalslabsmod:block/sunflower_bottom_slab" },
+        "facing=west,half=lower,slabhalf=true":  { "model": "naturalslabsmod:block/sunflower_bottom_slab", "y": 180, "uvlock": true },
+        "facing=south,half=lower,slabhalf=true": { "model": "naturalslabsmod:block/sunflower_bottom_slab", "y": 90, "uvlock": true },
+        "facing=north,half=lower,slabhalf=true": { "model": "naturalslabsmod:block/sunflower_bottom_slab", "y": 270, "uvlock": true },
+        "facing=east,half=upper,slabhalf=true":  { "model": "naturalslabsmod:block/sunflower_top_slab" },
+        "facing=west,half=upper,slabhalf=true":  { "model": "naturalslabsmod:block/sunflower_top_slab", "y": 180, "uvlock": true },
+        "facing=south,half=upper,slabhalf=true": { "model": "naturalslabsmod:block/sunflower_top_slab", "y": 90, "uvlock": true },
+        "facing=north,half=upper,slabhalf=true": { "model": "naturalslabsmod:block/sunflower_top_slab", "y": 270, "uvlock": true }
+    }
+}

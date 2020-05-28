@@ -27,14 +27,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.endlesnights.naturalslabsmod.NaturalSlabsMod;
 import com.endlesnights.naturalslabsmod.init.ModBlocks;
 import com.endlesnights.naturalslabsmod.util.SlabAction;
 
@@ -44,7 +41,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.FenceGateBlock;
 
-@EventBusSubscriber(modid=NaturalSlabsMod.MODID, bus=Bus.MOD, value=Dist.CLIENT)
 public class BlockPathSlab extends SlabBlock implements IWaterLoggable
 {
 	

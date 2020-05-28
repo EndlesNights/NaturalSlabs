@@ -6,28 +6,38 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.block.TallFlowerBlock;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
 
 public class BlockSunFlower extends TallFlowerBlock
 {
 	public static final DirectionProperty HORIZONTAL_FACING = HorizontalBlock.HORIZONTAL_FACING;
+	public static final BooleanProperty SLABHALF = BooleanProperty.create("slabhalf");
 	
 	public BlockSunFlower(Properties properties)
 	{
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.LOWER).with(HORIZONTAL_FACING, Direction.SOUTH));
+		this.setDefaultState(this.stateContainer.getBaseState()
+				.with(HALF, DoubleBlockHalf.LOWER)
+				.with(SLABHALF,false)
+				.with(HORIZONTAL_FACING, Direction.SOUTH));
 	}
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		builder.add(HALF, HORIZONTAL_FACING);
+		builder.add(HALF, SLABHALF, HORIZONTAL_FACING);
 	}
+	
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
@@ -35,11 +45,16 @@ public class BlockSunFlower extends TallFlowerBlock
 		if(doubleblockhalf == DoubleBlockHalf.UPPER 
 				&& worldIn.getBlockState(currentPos.down()).getBlock() instanceof BlockSunFlower
 				&& worldIn.getBlockState(currentPos.down()).get(HALF) == DoubleBlockHalf.LOWER)
-			return stateIn.with(HORIZONTAL_FACING, worldIn.getBlockState(currentPos.down()).get(HORIZONTAL_FACING));
+			return stateIn
+					.with(HORIZONTAL_FACING, worldIn.getBlockState(currentPos.down()).get(HORIZONTAL_FACING))
+					.with(SLABHALF, worldIn.getBlockState(currentPos.down()).get(SLABHALF));
 		
-		if (facing.getAxis() != Direction.Axis.Y || doubleblockhalf == DoubleBlockHalf.LOWER != (facing == Direction.UP) || facingState.getBlock() == this && facingState.get(HALF) != doubleblockhalf) {
-			return doubleblockhalf == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
+		if (facing.getAxis() != Direction.Axis.Y || doubleblockhalf == DoubleBlockHalf.LOWER != (facing == Direction.UP) || facingState.getBlock() == this && facingState.get(HALF) != doubleblockhalf)
+		{
+			return doubleblockhalf == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn
+					.with(SLABHALF, worldIn.getBlockState(currentPos.down()).getBlock() instanceof SlabBlock && worldIn.getBlockState(currentPos.down()).get(SlabBlock.TYPE) == SlabType.BOTTOM ? true : false);
 		} else {
+			spawnAsEntity((World) worldIn, currentPos, new ItemStack(this));
 			return Blocks.AIR.getDefaultState();
 		}
 	}
@@ -54,7 +69,10 @@ public class BlockSunFlower extends TallFlowerBlock
 			if (direction.getAxis().isHorizontal()) {
 				Direction direction1 = direction.getOpposite();
 				BlockPos blockpos = context.getPos();
-				return blockpos.getY() < context.getWorld().getDimension().getHeight() - 1 && context.getWorld().getBlockState(blockpos.up()).isReplaceable(context) ? this.getDefaultState().with(HORIZONTAL_FACING, direction1) : null;
+				return blockpos.getY() < context.getWorld().getDimension().getHeight() - 1 && context.getWorld().getBlockState(blockpos.up()).isReplaceable(context) ? this.getDefaultState()
+						.with(HORIZONTAL_FACING, direction1)
+						.with(SLABHALF, context.getWorld().getBlockState(blockpos.down()).getBlock() instanceof SlabBlock && context.getWorld().getBlockState(blockpos.down()).get(SlabBlock.TYPE) == SlabType.BOTTOM ? true : false)
+						: null;
 			}
 		}
 		return null;

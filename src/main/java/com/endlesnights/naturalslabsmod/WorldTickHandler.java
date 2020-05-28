@@ -54,8 +54,8 @@ public class WorldTickHandler
 	    			@SuppressWarnings("unchecked")
 	    			Iterable<ChunkHolder> chunkContainer = (Iterable<ChunkHolder>) getChunkHolderIterator.invoke(world.getChunkProvider().chunkManager);
 	    			
-	    			if(world.rand.nextInt(16) > 0)
-	    				return;
+//	    			if(world.rand.nextInt(16) > 0)
+//	    				return;
 	    			
 	    			Config.loadConfig(Config.SERVER, FMLPaths.CONFIGDIR.get().resolve("naturalslabsmod-server.toml").toString());
 	    			stackingSnow = NaturalSlabsConfig.snowAccumilation.get();
@@ -137,7 +137,7 @@ public class WorldTickHandler
 		    		    			
 		    		    			return;
 		    		    		}
-		    			    	
+		    					
 		    			    	if(NaturalSlabsConfig.snowSlabStair.get())
 		    			    	{
 			    					if(world.getBlockState(pos.down()).getBlock() instanceof SlabBlock
@@ -146,8 +146,15 @@ public class WorldTickHandler
 				    					if(stackingSnow && world.getBlockState(pos).getBlock() instanceof BlockSnowSlab 
 				    							&& world.getBlockState(pos).get(BlockSnowSlab.LAYERS)<= NaturalSlabsConfig.snowMaxHeightSlab.get() )
 				    					{
-				    						world.setBlockState(pos, ModBlocks.block_snow_slab.getDefaultState()
-				    								.with(BlockSnowSlab.LAYERS, world.getBlockState(pos).get(BlockSnowSlab.LAYERS) +1));
+			    							if(world.getBlockState(pos).get(BlockSnowSlab.LAYERS) == 12)
+			    							{
+			    								//world.setBlockState(pos.up(), Blocks.SNOW.getDefaultState());
+			    							}
+			    							else
+			    							{
+					    						world.setBlockState(pos, ModBlocks.block_snow_slab.getDefaultState()
+					    								.with(BlockSnowSlab.LAYERS, world.getBlockState(pos).get(BlockSnowSlab.LAYERS) +1));
+			    							}
 				    					}
 				    					else if(world.isAirBlock(pos))
 				    					{
@@ -161,10 +168,17 @@ public class WorldTickHandler
 			    						if(stackingSnow && world.getBlockState(pos).getBlock() instanceof BlockSnowStairs
 				    						&& world.getBlockState(pos).get(BlockSnowSlab.LAYERS)<= NaturalSlabsConfig.snowMaxHeightSlab.get())
 			    						{
-			    							world.setBlockState(pos, ModBlocks.block_snow_stair.getDefaultState()  
-			    									.with(StairsBlock.FACING, world.getBlockState(pos.down()).get(StairsBlock.FACING))
-			    									.with(StairsBlock.SHAPE, world.getBlockState(pos.down()).get(StairsBlock.SHAPE))
-			    									.with(BlockSnowSlab.LAYERS, world.getBlockState(pos).get(BlockSnowSlab.LAYERS) +1));
+			    							if(world.getBlockState(pos).get(BlockSnowSlab.LAYERS) == 12)
+			    							{
+			    								//world.setBlockState(pos.up(), Blocks.SNOW.getDefaultState());
+			    							}
+			    							else
+			    							{
+				    							world.setBlockState(pos, ModBlocks.block_snow_stair.getDefaultState()  
+				    									.with(StairsBlock.FACING, world.getBlockState(pos.down()).get(StairsBlock.FACING))
+				    									.with(StairsBlock.SHAPE, world.getBlockState(pos.down()).get(StairsBlock.SHAPE))
+				    									.with(BlockSnowSlab.LAYERS, world.getBlockState(pos).get(BlockSnowSlab.LAYERS) +1));
+			    							}
 			    						}
 			    						else if(world.isAirBlock(pos))
 			    						{

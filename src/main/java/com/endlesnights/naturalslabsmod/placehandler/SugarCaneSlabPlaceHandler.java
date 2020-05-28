@@ -8,10 +8,14 @@ import com.endlesnights.naturalslabsmod.blocks.foliage.SugarCaneSlab;
 import com.endlesnights.naturalslabsmod.init.ModBlocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.properties.SlabType;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -41,19 +45,35 @@ public class SugarCaneSlabPlaceHandler
 		BlockPos pos = event.getPos();
 		Direction face = event.getFace();
 		BlockPos placeAt = pos.offset(face);
-		World world = event.getWorld();		
-
+		World world = event.getWorld();			
+		
 		if( ((world.getBlockState(pos).getBlock() instanceof SlabBlock && world.getBlockState(pos).get(SlabBlock.TYPE) == SlabType.BOTTOM 
 				&& ( world.getBlockState(pos).getBlock() == ModBlocks.block_grass_slab
 						|| world.getBlockState(pos).getBlock() == ModBlocks.block_dirt_slab
 						|| world.getBlockState(pos).getBlock() == ModBlocks.block_coarse_dirt_slab
 						|| world.getBlockState(pos).getBlock() == ModBlocks.block_sand_slab
 						|| world.getBlockState(pos).getBlock() == ModBlocks.block_red_sand_slab))
-				|| world.getBlockState(pos).getBlock() instanceof SugarCaneSlab)
+				|| world.getBlockState(placeAt.down()).getBlock() instanceof SugarCaneSlab)
 				&& face == Direction.UP
 				&& (world.isAirBlock(placeAt) || world.getFluidState(placeAt).getFluid() == Fluids.WATER || world.getFluidState(placeAt).getFluid() == Fluids.FLOWING_WATER) )
 		{	
-			world.setBlockState(placeAt, block.getDefaultState());
+			boolean place = world.getBlockState(placeAt.down()).getBlock() instanceof SugarCaneSlab ? true : false;
+			
+			if(!place)
+				for(Direction direction : Direction.Plane.HORIZONTAL)
+				{
+					BlockState blockstate = world.getBlockState(placeAt.down().offset(direction));
+					IFluidState ifluidstate = world.getFluidState(placeAt.down().offset(direction));
+					if (ifluidstate.isTagged(FluidTags.WATER) || blockstate.getBlock() == Blocks.FROSTED_ICE)
+					{
+						place = true;
+					}
+				}
+			
+			if(!place)
+				return;
+			
+   			world.setBlockState(placeAt, block.getDefaultState());
 
 			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), block.getSoundType(world.getBlockState(pos)).getPlaceSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
 			event.getPlayer().swingArm(event.getHand());
@@ -61,6 +81,7 @@ public class SugarCaneSlabPlaceHandler
 			if(!event.getPlayer().isCreative())
 				held.shrink(1);
 			event.setCanceled(true);
+			return;
 		}
 	}
 	

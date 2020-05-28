@@ -2,7 +2,6 @@ package com.endlesnights.naturalslabsmod.blocks.slabs;
 
 import javax.annotation.Nullable;
 
-import com.endlesnights.naturalslabsmod.NaturalSlabsMod;
 import com.endlesnights.naturalslabsmod.init.ModBlocks;
 import com.endlesnights.naturalslabsmod.placehandler.SlabHelper;
 import com.endlesnights.naturalslabsmod.util.SlabAction;
@@ -39,12 +38,8 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-@EventBusSubscriber(modid=NaturalSlabsMod.MODID, bus=Bus.MOD, value=Dist.CLIENT)
 public class BlockCoarseDirtSlab extends SlabBlock implements IWaterLoggable
 {
 	
@@ -220,7 +215,7 @@ public class BlockCoarseDirtSlab extends SlabBlock implements IWaterLoggable
 		
 		if (itemStack.getItem() instanceof HoeItem )
         	return onItemUseHoe(state, worldIn, pos, playerIn, hand, p_225533_6_);
-		else if (itemStack.getItem() instanceof ShovelItem)
+		if (itemStack.getItem() instanceof ShovelItem)
 			return SlabAction.onItemUseSpade(state, worldIn, pos, playerIn, hand, p_225533_6_);
 
 			   

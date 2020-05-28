@@ -5,7 +5,6 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.endlesnights.naturalslabsmod.NaturalSlabsMod;
 import com.endlesnights.naturalslabsmod.init.ModBlocks;
 import com.endlesnights.naturalslabsmod.placehandler.SlabHelper;
 import com.endlesnights.naturalslabsmod.util.SlabAction;
@@ -17,7 +16,7 @@ import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.block.SnowBlock;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
@@ -29,6 +28,7 @@ import net.minecraft.item.ShovelItem;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.state.properties.Half;
 import net.minecraft.state.properties.SlabType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ActionResultType;
@@ -51,12 +51,9 @@ import net.minecraft.world.gen.feature.DecoratedFeatureConfig;
 import net.minecraft.world.gen.feature.FlowersFeature;
 import net.minecraft.world.lighting.LightEngine;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-@EventBusSubscriber(modid=NaturalSlabsMod.MODID, bus=Bus.MOD, value=Dist.CLIENT)
+
 public class BlockGrassSlab extends SlabBlock implements IWaterLoggable, IGrowable
 {
 	
@@ -228,12 +225,12 @@ public class BlockGrassSlab extends SlabBlock implements IWaterLoggable, IGrowab
 	    			return true;
 	    		else if(world.getFluidState(pos.add(0,waterLevelMin,1)).isTagged(FluidTags.WATER))
 	    			return true;
-	    		else if(world.getFluidState(pos.add(1,waterLevelMin,-1)).isTagged(FluidTags.WATER))
+	    		else if(world.getFluidState(pos.add(0,waterLevelMin,-1)).isTagged(FluidTags.WATER))
 	    			return true;
 	    		waterLevelMin++;
 	    	}
     		
-    		return true;
+    		return false;
     	}
     	else if(plant.getBlock() == Blocks.BAMBOO_SAPLING  || plant.getBlock() == Blocks.BAMBOO )
     	{
@@ -313,7 +310,7 @@ public class BlockGrassSlab extends SlabBlock implements IWaterLoggable, IGrowab
 	            blockpos1 = blockpos1.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
 	            if (worldIn.getBlockState(blockpos1.down()).getBlock() != this
 	            		&& worldIn.getBlockState(blockpos1.down()).getBlock() != Blocks.GRASS_BLOCK.getBlock()
-	            		&& worldIn.getBlockState(blockpos1.down()).getBlock() != ModBlocks.tutorial_block.getBlock()
+	            		&& (worldIn.getBlockState(blockpos1.down()).getBlock() != ModBlocks.block_grass_stairs.getBlock() && worldIn.getBlockState(blockpos1.down()).get(StairsBlock.HALF) == Half.TOP)
 	            		|| worldIn.getBlockState(blockpos1).isCollisionShapeOpaque(worldIn, blockpos1))
 	            {
 	            	
@@ -342,8 +339,11 @@ public class BlockGrassSlab extends SlabBlock implements IWaterLoggable, IGrowab
 		}
 		else
 		{
-			if (world.getLight(blockPos.up()) >= 9)
+			if (world.getLight(blockPos.up()) >= 9 )
 			{
+				if(state.get(TYPE) == SlabType.BOTTOM && (state.get(WATERLOGGED) == false))
+					return;
+				
 				BlockState blockstate = this.getDefaultState();
 					
 				for(int i = 0; i < 4; ++i)
@@ -356,16 +356,17 @@ public class BlockGrassSlab extends SlabBlock implements IWaterLoggable, IGrowab
 					}
 					else if(world.getBlockState(blockpos).getBlock() == ModBlocks.block_dirt_slab && func_220256_c(blockstate, world, blockpos))
 					{
-						if(world.getBlockState(blockpos).get(SlabBlock.TYPE) == SlabType.TOP
-								&& !(world.getBlockState(blockPos.up()).getFluidState() == Fluids.WATER))
+						if(world.getBlockState(blockpos).get(SlabBlock.TYPE) == SlabType.TOP)
 						{
-							blockstate = ModBlocks.block_grass_slab.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP); // TODO set up a check for Block.Dirt and different DirtSlab
+							blockstate = ModBlocks.block_grass_slab.getDefaultState() // TODO set up a check for Block.Dirt and different DirtSlab
+									.with(SlabBlock.TYPE, SlabType.TOP)
+									.with(WATERLOGGED, world.getBlockState(blockpos).get(WATERLOGGED)); 
 							world.setBlockState(blockpos, blockstate);
 						}
-						else if (world.getBlockState(blockPos).get(SlabBlock.TYPE) == SlabType.BOTTOM
-								&& !world.getBlockState(blockPos).get(WATERLOGGED))
+						else if (world.getBlockState(blockpos).get(SlabBlock.TYPE) == SlabType.BOTTOM)
 						{
-							blockstate = ModBlocks.block_grass_slab.getDefaultState(); // TODO set up a check for Block.Dirt and different DirtSlab
+							blockstate = ModBlocks.block_grass_slab.getDefaultState() // TODO set up a check for Block.Dirt and different DirtSlab
+									.with(WATERLOGGED, world.getBlockState(blockpos).get(WATERLOGGED)); 
 							world.setBlockState(blockpos, blockstate);
 						}
 					}
@@ -380,7 +381,7 @@ public class BlockGrassSlab extends SlabBlock implements IWaterLoggable, IGrowab
 		BlockPos blockpos = pos.up();
 		BlockState blockstate = reader.getBlockState(blockpos);
 				
-		if (blockstate.getBlock() == Blocks.SNOW && blockstate.get(SnowBlock.LAYERS) == 1)
+		if (blockstate.getBlock() == ModBlocks.block_snow_slab && blockstate.get(BlockSnowSlab.LAYERS) == 1)
 		{
 			return true;
 		}

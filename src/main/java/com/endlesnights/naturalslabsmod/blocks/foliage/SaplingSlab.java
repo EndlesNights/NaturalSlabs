@@ -49,7 +49,7 @@ public class SaplingSlab extends SaplingBlock
 		} else {
 			if (!net.minecraftforge.event.ForgeEventFactory.saplingGrowTree(worldIn, rand, blockPos))
 				return;
-			this.tree.func_225545_a_(worldIn, worldIn.getChunkProvider().getChunkGenerator(), blockPos, blockState, rand);
+			this.tree.place(worldIn, worldIn.getChunkProvider().getChunkGenerator(), blockPos, blockState, rand);
 			worldIn.setBlockState(blockPos.down(), Blocks.DIRT.getDefaultState());
 		}
 	}

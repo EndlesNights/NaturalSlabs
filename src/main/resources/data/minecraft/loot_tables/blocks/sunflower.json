@@ -9,13 +9,13 @@
           "conditions": [
             {
               "condition": "minecraft:block_state_property",
-              "block": "naturalslabsmod:sunflower_slab",
+              "block": "minecraft:sunflower",
               "properties": {
                 "half": "lower"
               }
             }
           ],
-          "name": "minecraft:sunflower"
+          "name": "naturalslabsmod:sunfloweralt"
         }
       ],
       "conditions": [

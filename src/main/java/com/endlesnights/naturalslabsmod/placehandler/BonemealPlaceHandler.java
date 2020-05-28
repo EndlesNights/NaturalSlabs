@@ -12,7 +12,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.properties.Half;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -44,7 +46,9 @@ public class BonemealPlaceHandler
 		BlockPos pos = event.getPos();
 		World world = event.getWorld();
 		
-		if(!(world.getBlockState(pos).getBlock() == ModBlocks.block_grass_slab || world.getBlockState(pos).getBlock() == Blocks.GRASS_BLOCK ))
+		if(!(world.getBlockState(pos).getBlock() == ModBlocks.block_grass_slab
+				|| (world.getBlockState(pos).getBlock() == ModBlocks.block_grass_stairs && world.getBlockState(pos).get(StairsBlock.HALF) == Half.TOP)
+				|| world.getBlockState(pos).getBlock() == Blocks.GRASS_BLOCK ))
 			return;
 						
 		if(!world.isRemote())
@@ -82,6 +86,11 @@ public class BonemealPlaceHandler
 	               {
 	            	   ((IGrowable)ModBlocks.grass_slab).grow(worldIn, rand, blockpos1, blockstate2);
 	               }
+	               else if(blockstate2.getBlock() == ModBlocks.block_grass_stairs && blockstate2.get(StairsBlock.HALF) == Half.TOP && rand.nextInt(10) == 0)
+	               {
+	            	   ((IGrowable)ModBlocks.block_grass_stairs).grow(worldIn, rand, blockpos1, blockstate2);
+	               }
+
 
 
 	               if (!blockstate2.isAir()) {
@@ -114,9 +123,10 @@ public class BonemealPlaceHandler
 	            }
 
 	            blockpos1 = blockpos1.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
-	            if (worldIn.getBlockState(blockpos1.down()).getBlock() !=  ModBlocks.block_grass_slab.getBlock()
+	            if (
+	            		   worldIn.getBlockState(blockpos1.down()).getBlock() !=  ModBlocks.block_grass_slab.getBlock()
 	            		&& worldIn.getBlockState(blockpos1.down()).getBlock() != Blocks.GRASS_BLOCK.getBlock()
-	            		&& worldIn.getBlockState(blockpos1.down()).getBlock() != ModBlocks.tutorial_block.getBlock()
+	            		&& !(worldIn.getBlockState(blockpos1.down()).getBlock() == ModBlocks.block_grass_stairs.getBlock() && worldIn.getBlockState(blockpos1.down()).get(StairsBlock.HALF) == Half.TOP)
 	            		|| worldIn.getBlockState(blockpos1).isCollisionShapeOpaque(worldIn, blockpos1))
 	            {
 	            	

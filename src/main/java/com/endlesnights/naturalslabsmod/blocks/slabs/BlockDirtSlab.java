@@ -91,13 +91,17 @@ public class BlockDirtSlab extends SlabBlock implements IWaterLoggable
 						if(world.getBlockState(blockPos).get(SlabBlock.TYPE) == SlabType.TOP
 								&& !(world.getBlockState(blockPos.up()).getFluidState() == Fluids.WATER))
 						{
-							blockstate = ModBlocks.block_grass_slab.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP); // TODO set up a check for Block.Dirt and different DirtSlab
+							blockstate = ModBlocks.block_grass_slab.getDefaultState()// TODO set up a check for Block.Dirt and different DirtSlab
+									.with(SlabBlock.TYPE, SlabType.TOP)
+									.with(WATERLOGGED, state.get(WATERLOGGED));
+							
 							world.setBlockState(blockPos, blockstate);
 						}
 						else if (world.getBlockState(blockPos).get(SlabBlock.TYPE) == SlabType.BOTTOM
 								&& !world.getBlockState(blockPos).get(WATERLOGGED))
 						{
-							blockstate = ModBlocks.block_grass_slab.getDefaultState(); // TODO set up a check for Block.Dirt and different DirtSlab
+							blockstate = ModBlocks.block_grass_slab.getDefaultState() // TODO set up a check for Block.Dirt and different DirtSlab
+									.with(WATERLOGGED, state.get(WATERLOGGED));
 							world.setBlockState(blockPos, blockstate);
 						}
 					}

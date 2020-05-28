@@ -13,6 +13,11 @@
 	"block.naturalslabsmod.block_sand_slab": "Sand Slab",
 	"block.naturalslabsmod.block_red_sand_slab": "Red Sand Slab",
 	
+	"block.naturalslabsmod.block_coarse_dirt_stairs": "Coarse Dirt Stairs",
+	"block.naturalslabsmod.block_dirt_stairs": "Dirt Stairs",
+	"block.naturalslabsmod.block_grass_path_stairs": "Path Stairs",
+	"block.naturalslabsmod.block_grass_stairs": "Grass Stairs",
+	
 	"block.naturalslabsmod.grass_slab": "Grass",
 	"block.naturalslabsmod.fern_slab": "Fern",
 	
@@ -34,5 +39,5 @@
 
 	"block.naturalslabsmod.wither_rose_slab": "Wither Rose",
 	
-	"block.naturalslabsmod.sunflower_slab": "Sunflower"
+	"block.naturalslabsmod.sunfloweralt": "Sunflower Block"
 }

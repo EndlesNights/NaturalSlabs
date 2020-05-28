@@ -2,7 +2,7 @@ modLoader="javafml" #mandatory
 loaderVersion="[30,)" #mandatory
 [[mods]] #mandatory
 modId="naturalslabsmod" #mandatory
-version="1.0.4" #mandatory
+version="1.0.5" #mandatory
 displayName="Natural Slabs Mod" #mandatory
 displayURL="https://www.curseforge.com/minecraft/mc-mods/torchslabs-mod" #optional
 

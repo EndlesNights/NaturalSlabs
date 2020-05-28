@@ -1,4 +1,5 @@
 {
+	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/slab",
 	"textures": {
 		"particle": "block/dirt",

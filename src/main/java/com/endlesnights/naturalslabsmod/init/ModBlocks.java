@@ -14,6 +14,7 @@ import com.endlesnights.naturalslabsmod.blocks.foliage.MushroomSlab;
 import com.endlesnights.naturalslabsmod.blocks.foliage.PotatoSlab;
 import com.endlesnights.naturalslabsmod.blocks.foliage.SaplingSlab;
 import com.endlesnights.naturalslabsmod.blocks.foliage.SugarCaneSlab;
+import com.endlesnights.naturalslabsmod.blocks.foliage.SweetBerryBushSlab;
 import com.endlesnights.naturalslabsmod.blocks.foliage.TallFlowerSlab;
 import com.endlesnights.naturalslabsmod.blocks.slabs.BlockCoarseDirtSlab;
 import com.endlesnights.naturalslabsmod.blocks.slabs.BlockDirtSlab;
@@ -23,6 +24,10 @@ import com.endlesnights.naturalslabsmod.blocks.slabs.BlockPathSlab;
 import com.endlesnights.naturalslabsmod.blocks.slabs.BlockSnowSlab;
 import com.endlesnights.naturalslabsmod.blocks.slabs.BlockSnowStairs;
 import com.endlesnights.naturalslabsmod.blocks.slabs.FallinglSlab;
+import com.endlesnights.naturalslabsmod.blocks.stair.BlockCoarseDirtStair;
+import com.endlesnights.naturalslabsmod.blocks.stair.BlockDirtStair;
+import com.endlesnights.naturalslabsmod.blocks.stair.BlockGrassPathStair;
+import com.endlesnights.naturalslabsmod.blocks.stair.BlockGrassStair;
 import com.endlesnights.naturalslabsmod.placehandler.BonemealPlaceHandler;
 import com.endlesnights.naturalslabsmod.placehandler.FenceSlabPlaceHandler;
 import com.endlesnights.naturalslabsmod.placehandler.SnowSlabPlaceHandler;
@@ -64,6 +69,11 @@ public class ModBlocks implements INaturalSlabsCompat
 	public static Block block_farmland_slab = null;
 	public static Block block_coarse_dirt_slab = null;
 	
+	public static Block block_grass_stairs = null;
+	public static Block block_dirt_stairs = null;
+	public static Block block_path_stairs = null;
+	public static Block block_coarse_dirt_stairs = null;
+	
 	public static Block block_gravel_slab = null;
 	public static Block block_sand_slab = null;
 	public static Block block_red_sand_slab = null;
@@ -96,7 +106,7 @@ public class ModBlocks implements INaturalSlabsCompat
 	public static Block potatoes_slab = null;
 	public static Block beetroots_slab = null;
 	
-	public static Block sunflower_slab = null;
+	//public static Block sunflower_slab = null;
 	public static Block lilac_slab = null;
 	public static Block rose_bush_slab = null;
 	public static Block peony_slab = null;
@@ -119,7 +129,8 @@ public class ModBlocks implements INaturalSlabsCompat
 	public static Block oak_fence_slab = null;
 	public static Block dark_oak_fence_slab = null;
 	
-	public static Block SUNFLOWER = null;
+	public static Block sunfloweralt = null;
+	public static Block sweetBerrySlab = null;
 	
 	@SubscribeEvent
 	public void registerBlocks(RegistryEvent.Register<Block> event)
@@ -137,6 +148,10 @@ public class ModBlocks implements INaturalSlabsCompat
 		block_farmland_slab = registerBlock(new BlockFarmlandSlab(), "block_farmland_slab");;
 		block_coarse_dirt_slab = registerBlock(new BlockCoarseDirtSlab(), "block_coarse_dirt_slab");
 		
+		block_coarse_dirt_stairs = registerBlock(new BlockCoarseDirtStair(Blocks.COARSE_DIRT.getDefaultState(), Block.Properties.from(Blocks.COARSE_DIRT)), "block_coarse_dirt_stairs");
+		block_dirt_stairs = registerBlock(new BlockDirtStair(Blocks.DIRT.getDefaultState(), Block.Properties.from(Blocks.DIRT)), "block_dirt_stairs");
+		block_path_stairs = registerBlock(new BlockGrassPathStair(Blocks.GRASS_PATH.getDefaultState(), Block.Properties.from(Blocks.GRASS_PATH)), "block_grass_path_stairs");
+		block_grass_stairs = registerBlock(new BlockGrassStair(Blocks.DIRT.getDefaultState(), Block.Properties.from(Blocks.GRASS_BLOCK)), "block_grass_stairs");
 		
 		block_gravel_slab = registerBlock(new FallinglSlab(Block.Properties.from(Blocks.GRAVEL), -16777216, Blocks.GRAVEL), "block_gravel_slab");
 		block_sand_slab = registerBlock(new FallinglSlab(Block.Properties.from(Blocks.SAND), 14406560, Blocks.SAND), "block_sand_slab");
@@ -170,7 +185,7 @@ public class ModBlocks implements INaturalSlabsCompat
 		potatoes_slab = registerBlock(new PotatoSlab(Block.Properties.from(Blocks.POTATOES)), "potatoes_slab");
 		beetroots_slab = registerBlock(new BeetrootSlab(Block.Properties.from(Blocks.BEETROOTS)), "beetroots_slab");
 		
-		sunflower_slab = registerBlock(new TallFlowerSlab(Block.Properties.from(Blocks.SUNFLOWER)), "sunflower_slab");
+		//sunflower_slab = registerBlock(new TallFlowerSlab(Block.Properties.from(Blocks.SUNFLOWER)), "sunflower_slab");
 		lilac_slab = registerBlock(new TallFlowerSlab(Block.Properties.from(Blocks.LILAC)), "lilac_slab");
 		rose_bush_slab = registerBlock(new TallFlowerSlab(Block.Properties.from(Blocks.ROSE_BUSH)), "rose_bush_slab");
 		peony_slab = registerBlock(new TallFlowerSlab(Block.Properties.from(Blocks.PEONY)), "peony_slab");
@@ -187,7 +202,8 @@ public class ModBlocks implements INaturalSlabsCompat
 		
 		sugar_cane_slab = registerBlock(new SugarCaneSlab(Block.Properties.from(Blocks.SUGAR_CANE).lootFrom(Blocks.SUGAR_CANE)), "sugar_cane_slab");
 		
-		SUNFLOWER = registerBlock(new BlockSunFlower (Block.Properties.from(Blocks.SUNFLOWER).lootFrom(Blocks.SUNFLOWER)), "sunflower");
+		sunfloweralt = registerBlock(new BlockSunFlower (Block.Properties.from(Blocks.SUNFLOWER).lootFrom(Blocks.SUNFLOWER)), "sunfloweralt");
+		sweetBerrySlab = registerBlock(new SweetBerryBushSlab (Block.Properties.from(Blocks.SWEET_BERRY_BUSH)), "sweet_berry_bush_slab");
 		
         if (FMLEnvironment.dist == Dist.CLIENT)
         {
@@ -197,6 +213,7 @@ public class ModBlocks implements INaturalSlabsCompat
             //RenderType translucentRenderType = RenderType.func_228645_f_();
         	
 			RenderTypeLookup.setRenderLayer(block_grass_slab, transparentRenderType);
+			RenderTypeLookup.setRenderLayer(block_grass_stairs, transparentRenderType);
         	
 			RenderTypeLookup.setRenderLayer(grass_slab, transparentRenderType);
 			RenderTypeLookup.setRenderLayer(fern_slab, transparentRenderType);
@@ -226,7 +243,7 @@ public class ModBlocks implements INaturalSlabsCompat
 			RenderTypeLookup.setRenderLayer(potatoes_slab, transparentRenderType);
 			RenderTypeLookup.setRenderLayer(beetroots_slab, transparentRenderType);
 			
-			RenderTypeLookup.setRenderLayer(sunflower_slab, transparentRenderType);
+			//RenderTypeLookup.setRenderLayer(sunflower_slab, transparentRenderType);
 			RenderTypeLookup.setRenderLayer(lilac_slab, transparentRenderType);
 			RenderTypeLookup.setRenderLayer(rose_bush_slab, transparentRenderType);
 			RenderTypeLookup.setRenderLayer(peony_slab, transparentRenderType);
@@ -243,7 +260,8 @@ public class ModBlocks implements INaturalSlabsCompat
 			
 			RenderTypeLookup.setRenderLayer(sugar_cane_slab, transparentRenderType);
 			
-			RenderTypeLookup.setRenderLayer(SUNFLOWER, transparentRenderType);
+			RenderTypeLookup.setRenderLayer(sunfloweralt, transparentRenderType);
+			RenderTypeLookup.setRenderLayer(sweetBerrySlab, transparentRenderType);
             
         }
 	}
