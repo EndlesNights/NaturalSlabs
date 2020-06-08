@@ -90,41 +90,8 @@ public class WorldTickHandler
 		    			    		if(height == 8 || height >= NaturalSlabsConfig.snowMaxHeightBlock.get())
 		    			    			return;
 		    			    		
-		    			    		BlockState north = world.getBlockState(pos.north());
-		    			    		BlockState south = world.getBlockState(pos.south());
-		    			    		BlockState east = world.getBlockState(pos.east());
-		    			    		BlockState west = world.getBlockState(pos.west());
-		    			    		float surroundings = 0;
-		    			    		if(north.getBlock() instanceof SnowBlock)
-		    			    		{
-		    			    			surroundings += north.get(SnowBlock.LAYERS);
-		    			    		}else if(north.isSolid())
-		    			    		{
-		    			    			surroundings += 8;
-		    			    		}
-		    			    		if(south.getBlock() instanceof SnowBlock)
-		    			   			{
-		    			   				surroundings += south.get(SnowBlock.LAYERS);
-		    			   			}else if(south.isSolid())
-		    			   			{
-		    		    				surroundings += 8;
-		    		    			}
-		    		    			if(east.getBlock() instanceof SnowBlock)
-		    		    			{
-		    		    				surroundings += east.get(SnowBlock.LAYERS);
-		    		    			}else if(east.isSolid())
-		    		    			{
-		    		    				surroundings += 8;
-		    		    			}
-		    		    			if(west.getBlock() instanceof SnowBlock)
-		    		    			{
-		    		    				surroundings += west.get(SnowBlock.LAYERS);
-		    		    			}else if(west.isSolid())
-		    		    			{
-		    		    				surroundings += 8;
-		    		    			}
-		    		    			surroundings /= 4;
-		    		    			//Done calculating surroundings
+		    			    		float surroundings = surroundingHeight(world, pos);
+	
 		    		    			if(surroundings >= height)
 		   			   				{
 		   			   					float weight = (surroundings - height) / 2 + 0.05f;
@@ -140,20 +107,30 @@ public class WorldTickHandler
 		    					
 		    			    	if(NaturalSlabsConfig.snowSlabStair.get())
 		    			    	{
+		    			    		
 			    					if(world.getBlockState(pos.down()).getBlock() instanceof SlabBlock
 			    							&& world.getBlockState(pos.down()).get(SlabBlock.TYPE) == SlabType.BOTTOM)
 			    					{
 				    					if(stackingSnow && world.getBlockState(pos).getBlock() instanceof BlockSnowSlab 
 				    							&& world.getBlockState(pos).get(BlockSnowSlab.LAYERS)<= NaturalSlabsConfig.snowMaxHeightSlab.get() )
 				    					{
-			    							if(world.getBlockState(pos).get(BlockSnowSlab.LAYERS) == 12)
-			    							{
-			    								//world.setBlockState(pos.up(), Blocks.SNOW.getDefaultState());
-			    							}
-			    							else
-			    							{
-					    						world.setBlockState(pos, ModBlocks.block_snow_slab.getDefaultState()
-					    								.with(BlockSnowSlab.LAYERS, world.getBlockState(pos).get(BlockSnowSlab.LAYERS) +1));
+
+				    			    		int height = state.get(BlockSnowSlab.LAYERS);
+				    			    		if(height == 12 || height >= NaturalSlabsConfig.snowMaxHeightBlock.get())
+				    			    			return;
+				    			    		
+				    			    		float surroundings = surroundingHeight(world, pos);
+			
+				    		    			if(surroundings >= height)
+				   			   				{
+				   			   					float weight = (surroundings - height) / 2 + 0.05f;
+				   			   					if(world.rand.nextFloat() <= weight)
+				    			   				{
+				   			   						//Add layer!
+					   			   					world.setBlockState(pos, ModBlocks.block_snow_slab.getDefaultState()
+						    								.with(BlockSnowSlab.LAYERS, world.getBlockState(pos).get(BlockSnowSlab.LAYERS) +1));
+				    		    				}
+					    		    			
 			    							}
 				    					}
 				    					else if(world.isAirBlock(pos))
@@ -168,17 +145,26 @@ public class WorldTickHandler
 			    						if(stackingSnow && world.getBlockState(pos).getBlock() instanceof BlockSnowStairs
 				    						&& world.getBlockState(pos).get(BlockSnowSlab.LAYERS)<= NaturalSlabsConfig.snowMaxHeightSlab.get())
 			    						{
-			    							if(world.getBlockState(pos).get(BlockSnowSlab.LAYERS) == 12)
-			    							{
-			    								//world.setBlockState(pos.up(), Blocks.SNOW.getDefaultState());
-			    							}
-			    							else
-			    							{
-				    							world.setBlockState(pos, ModBlocks.block_snow_stair.getDefaultState()  
+			    							
+				    			    		int height = state.get(BlockSnowSlab.LAYERS);
+				    			    		if(height == 12 || height >= NaturalSlabsConfig.snowMaxHeightBlock.get())
+				    			    			return;
+				    			    		
+				    			    		float surroundings = surroundingHeight(world, pos);
+			
+				    		    			if(surroundings >= height)
+				   			   				{
+				   			   					float weight = (surroundings - height) / 2 + 0.05f;
+				   			   					if(world.rand.nextFloat() <= weight)
+				    			   				{
+				   			   						//Add layer!
+				   			   					world.setBlockState(pos, ModBlocks.block_snow_stair.getDefaultState()  
 				    									.with(StairsBlock.FACING, world.getBlockState(pos.down()).get(StairsBlock.FACING))
 				    									.with(StairsBlock.SHAPE, world.getBlockState(pos.down()).get(StairsBlock.SHAPE))
 				    									.with(BlockSnowSlab.LAYERS, world.getBlockState(pos).get(BlockSnowSlab.LAYERS) +1));
-			    							}
+				    		    				}
+				   			   				}
+			    							
 			    						}
 			    						else if(world.isAirBlock(pos))
 			    						{
@@ -197,5 +183,59 @@ public class WorldTickHandler
 	    		}
 	    	}
 	    }
+	}
+	
+	
+	float surroundingHeight(ServerWorld world, BlockPos pos)
+	{
+		
+		BlockState north = world.getBlockState(pos.north());
+		BlockState south = world.getBlockState(pos.south());
+		BlockState east = world.getBlockState(pos.east());
+		BlockState west = world.getBlockState(pos.west());
+		
+		float surroundings = 0;
+		if(north.getBlock() instanceof SnowBlock)
+		{
+			surroundings += north.get(SnowBlock.LAYERS);
+		}else if(north.getBlock() instanceof BlockSnowStairs || north.getBlock() instanceof BlockSnowStairs) {
+			surroundings += north.get(BlockSnowStairs.LAYERS);
+		}else if(north.isSolid())
+		{
+			surroundings += 8;
+		}
+		
+		if(south.getBlock() instanceof SnowBlock)
+		{
+			surroundings += south.get(SnowBlock.LAYERS);
+		}else if(south.getBlock() instanceof BlockSnowStairs || south.getBlock() instanceof BlockSnowStairs) {
+			surroundings += south.get(BlockSnowStairs.LAYERS);
+		}else if(south.isSolid())
+		{
+			surroundings += 8;
+		}
+		
+		if(east.getBlock() instanceof SnowBlock)
+		{
+			surroundings += east.get(SnowBlock.LAYERS);
+		}else if(east.getBlock() instanceof BlockSnowStairs || east.getBlock() instanceof BlockSnowStairs) {
+			surroundings += east.get(BlockSnowStairs.LAYERS);
+		}else if(east.isSolid())
+		{
+			surroundings += 8;
+		}
+		
+		if(west.getBlock() instanceof SnowBlock)
+		{
+			surroundings += west.get(SnowBlock.LAYERS);
+		}else if(west.getBlock() instanceof BlockSnowStairs || west.getBlock() instanceof BlockSnowStairs) {
+			surroundings += west.get(BlockSnowStairs.LAYERS);
+		}else if(west.isSolid())
+		{
+			surroundings += 8;
+		}
+		surroundings /= 4;
+		
+		return surroundings;
 	}
 }

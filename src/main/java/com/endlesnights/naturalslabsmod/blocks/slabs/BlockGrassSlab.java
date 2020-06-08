@@ -341,7 +341,7 @@ public class BlockGrassSlab extends SlabBlock implements IWaterLoggable, IGrowab
 		{
 			if (world.getLight(blockPos.up()) >= 9 )
 			{
-				if(state.get(TYPE) == SlabType.BOTTOM && (state.get(WATERLOGGED) == false))
+				if(state.get(TYPE) == SlabType.BOTTOM && (state.get(WATERLOGGED) == true))
 					return;
 				
 				BlockState blockstate = this.getDefaultState();
